@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "715873698187",
+    "project_id": "my-petshop-8a860",
+    "storage_bucket": "my-petshop-8a860.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715873698187:android:3a54a35998a74c54946f8e",
+        "android_client_info": {
+          "package_name": "com.zafainvitation.my_petshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715873698187-mfgi02ie3cqc8a5m23merduvvllg12rb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiIogneDm_p6aLPkY0COmBTWDa8-uljC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "715873698187-mfgi02ie3cqc8a5m23merduvvllg12rb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
