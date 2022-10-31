@@ -1,16 +1,44 @@
-# my_petshop
+## About The Project (My Petshop)
 
-A new Flutter project.
+My petshop is an e-commerce application to buy all the necessities for pets
+
+<p align = "right"> (<a href = "#readme-top">back to top</a>) </p>
+
+### Built With
+
+This project was built using framework/libraries below:
+
+* Flutter
+* Firebase
+
+<p align = "right"> (<a href = "#readme-top">back to top</a>) </p>
+
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+## Roadmap
 
-A few resources to get you started if this is your first Flutter project:
+- [ ] Login
+- [ ] Register
+- [ ] Profile
+- [ ] Home
+- [ ] Product
+    - [ ] List
+    - [ ] Detail
+- [ ] Cart
+- [ ] Payment
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<p align = "right"> (<a href = "#readme-top">back to top</a>) </p>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Contact
+
+Zakiah Rezeki S Lubis - [@zack_ze_er] (https://instagram.com/zack_ze_er?igshid=YmMyMTA2M2Y=) - zakiahrezekislubis@gmail.com
+
+Project Link: [https://github.com/ZackR04/petshop] (https://github.com/ZackR04/petshop)
+
+<p align = "right"> (<a href = "#readme-top">back to top</a>) </p>
+
+## Acknowledgements
+
+<p align = "right"> (<a href = "#readme-top">back to top</a>) </p>
+ 
