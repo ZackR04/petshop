@@ -1,4 +1,4 @@
-## About The Project (My Petshop)
+## About The Project
 
 My petshop is an e-commerce application to buy all the necessities for pets
 
@@ -13,9 +13,14 @@ This project was built using framework/libraries below:
 
 <p align = "right"> (<a href = "#readme-top">back to top</a>) </p>
 
-
+<!-- GETTING STARTED -->
 ## Getting Started
 
+This is how to getting started this project locally.
+To get a local copy up and running follow these simple example steps.
+
+
+<!-- ROADMAP -->
 ## Roadmap
 
 - [ ] Login
@@ -30,6 +35,8 @@ This project was built using framework/libraries below:
 
 <p align = "right"> (<a href = "#readme-top">back to top</a>) </p>
 
+
+<!-- CONTACT -->
 ## Contact
 
 Zakiah Rezeki S Lubis - [@zack_ze_er] (https://instagram.com/zack_ze_er?igshid=YmMyMTA2M2Y=) - zakiahrezekislubis@gmail.com
@@ -39,6 +46,10 @@ Project Link: [https://github.com/ZackR04/petshop] (https://github.com/ZackR04/p
 <p align = "right"> (<a href = "#readme-top">back to top</a>) </p>
 
 ## Acknowledgements
+
+* [BLOC](https://choosealicense.com)
+* [Firebase](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+* [Velocity X](https://flexbox.malven.co/)
 
 <p align = "right"> (<a href = "#readme-top">back to top</a>) </p>
  
