@@ -47,9 +47,5 @@ Project Link: [https://github.com/ZackR04/petshop] (https://github.com/ZackR04/p
 
 ## Acknowledgements
 
-* [BLOC](https://choosealicense.com)
-* [Firebase](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Velocity X](https://flexbox.malven.co/)
-
 <p align = "right"> (<a href = "#readme-top">back to top</a>) </p>
  
