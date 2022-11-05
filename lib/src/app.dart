@@ -13,7 +13,15 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (context) => RegisterBloc(),
           child: Container(),
-        )
+        ),
+        BlocProvider(
+          create: (context) => LoginBloc(),
+          child: Container(),
+        ),
+        BlocProvider(
+          create: (context) => UserBloc(),
+          child: Container(),
+        ),
       ],
       child: MaterialApp.router(
         routerConfig: router,

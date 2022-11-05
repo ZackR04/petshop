@@ -1,16 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-part of 'register_bloc.dart';
+part of 'login_bloc.dart';
 
 @immutable
-abstract class RegisterEvent {}
+abstract class LoginEvent {}
 
-class RegisterUser extends RegisterEvent {
-  final String username;
+class LoginUser extends LoginEvent {
   final String email;
   final String password;
-
-  RegisterUser({
-    required this.username,
+  LoginUser({
     required this.email,
     required this.password,
   });

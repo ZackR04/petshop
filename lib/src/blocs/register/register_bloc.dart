@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_petshop/src/models/models.dart';
 import 'package:my_petshop/src/services/services.dart';
+import 'package:meta/meta.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';

@@ -19,15 +19,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: BlocListener<RegisterBloc, RegisterState>(
         listener: (context, state) {
           if (state is RegisterIsFailed) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: state.message.text.make()));
+            Commons().showSnackBar(context, state.message);
           } else if (state is RegisterIsSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: "Selamat Datang ${state.data.username} ".text.make()));
+            context.go(routeName.home);
           }
         },
         child: VStack([
-          'Register'.text.make().p16(),
+          VxBox()
+              .size(context.screenWidth, context.percentHeight * 20)
+              .color(colorName.primary)
+              .bottomRounded(value: 20)
+              .make(),
+          'Register'.text.headline5(context).make().p16(),
           _buildRegistrationForm(),
         ]),
       )),
@@ -35,37 +38,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Widget _buildRegistrationForm() {
-    return VStack([
-      TextFieldWidget(
-        controller: usernameController,
-        title: 'Name',
-      ),
-      8.heightBox,
-      TextFieldWidget(
-        controller: emailController,
-        title: 'Email',
-      ),
-      8.heightBox,
-      TextFieldWidget(
-        controller: passController,
-        title: 'Password',
-        isPassword: true,
-      ),
-      16.heightBox,
-      BlocBuilder<RegisterBloc, RegisterState>(
-        builder: (context, state) {
-          return ButtonWidget(
-            onPressed: () {
-              BlocProvider.of<RegisterBloc>(context).add(RegisterUser(
-                  username: usernameController.text,
-                  email: emailController.text,
-                  password: passController.text));
-            },
-            isLoading: (state is RegisterIsLoading) ? true : false,
-            text: 'Register',
-          );
-        },
-      )
-    ]);
+    return VStack(
+      [
+        TextFieldWidget(
+          controller: usernameController,
+          title: 'Name',
+        ),
+        8.heightBox,
+        TextFieldWidget(
+          controller: emailController,
+          title: 'Email',
+        ),
+        8.heightBox,
+        TextFieldWidget(
+          controller: passController,
+          title: 'Password',
+          isPassword: true,
+        ),
+        16.heightBox,
+        BlocBuilder<RegisterBloc, RegisterState>(
+          builder: (context, state) {
+            return ButtonWidget(
+              onPressed: () {
+                BlocProvider.of<RegisterBloc>(context).add(RegisterUser(
+                    username: usernameController.text,
+                    email: emailController.text,
+                    password: passController.text));
+              },
+              isLoading: (state is RegisterIsLoading) ? true : false,
+              text: 'Register',
+            );
+          },
+        )
+      ],
+    ).p(16);
   }
 }
