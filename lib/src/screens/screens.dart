@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_petshop/src/blocs/blocs.dart';
+import 'package:my_petshop/src/models/models.dart';
 import 'package:my_petshop/src/widgets/widgets.dart';
 import 'package:my_petshop/src/utilities/utilities.dart';
 import 'package:velocity_x/velocity_x.dart';
