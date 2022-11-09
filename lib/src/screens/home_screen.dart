@@ -44,7 +44,9 @@ class HomeScreen extends StatelessWidget {
             image: NetworkImage(data.photoProfile!),
             fit: BoxFit.cover,
           ),
-        ),
+        ).onTap(() {
+          context.go(routeName.adminPath);
+        }),
         10.widthBox,
         "Selamat Datang,\n".richText.size(11).withTextSpanChildren([
           data.username!.textSpan.size(14).bold.uppercase.make(),

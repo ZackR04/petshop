@@ -5,7 +5,7 @@ mixin routeName {
   static const splash = '/splash';
   static const register = '/register';
   static const home = '/home';
-  static const admin = '/admin';
+  static const admin = 'admin';
   static const adminPath = '/home/admin';
 }
 
@@ -37,10 +37,17 @@ final GoRouter router = GoRouter(initialLocation: routeName.splash, routes: [
     },
   ),
   GoRoute(
-    path: routeName.home,
-    builder: (context, state) {
-      BlocProvider.of<UserBloc>(context).add(LoadUserData());
-      return const HomeScreen();
-    },
-  ),
+      path: routeName.home,
+      builder: (context, state) {
+        BlocProvider.of<UserBloc>(context).add(LoadUserData());
+        return const HomeScreen();
+      },
+      routes: [
+        GoRoute(
+          path: routeName.admin,
+          builder: (context, state) {
+            return const AdminScreen();
+          },
+        ),
+      ]),
 ]);

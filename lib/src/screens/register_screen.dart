@@ -60,16 +60,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
           builder: (context, state) {
             return ButtonWidget(
               onPressed: () {
-                BlocProvider.of<RegisterBloc>(context).add(RegisterUser(
-                    username: usernameController.text,
-                    email: emailController.text,
-                    password: passController.text));
+                BlocProvider.of<RegisterBloc>(context).add(
+                  RegisterUser(
+                      username: usernameController.text,
+                      email: emailController.text,
+                      password: passController.text),
+                );
               },
               isLoading: (state is RegisterIsLoading) ? true : false,
               text: 'Register',
             );
           },
-        )
+        ),
+        16.heightBox,
+        'Login here'.text.makeCentered().onTap(() {
+          context.go(routeName.login);
+        })
       ],
     ).p(16);
   }
