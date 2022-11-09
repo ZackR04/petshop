@@ -1,4 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:my_petshop/src/services/services.dart';
 import 'package:my_petshop/src/utilities/utilities.dart';

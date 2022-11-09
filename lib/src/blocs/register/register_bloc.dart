@@ -1,7 +1,8 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc/bloc.dart';
 import 'package:my_petshop/src/models/models.dart';
 import 'package:my_petshop/src/services/services.dart';
 import 'package:meta/meta.dart';
+import 'package:my_petshop/src/utilities/utilities.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
@@ -15,7 +16,10 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       emit(
         result.fold(
           (l) => RegisterIsFailed(message: l),
-          (r) => RegisterIsSuccess(data: r),
+          (r) {
+            Commons().setUID(r.uid!);
+            return RegisterIsSuccess(data: r);
+          },
         ),
       );
     });
