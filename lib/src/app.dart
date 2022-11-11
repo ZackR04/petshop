@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_petshop/src/cubits/cubits.dart';
 import 'package:my_petshop/src/utilities/utilities.dart';
 import 'package:my_petshop/src/blocs/blocs.dart';
 
@@ -20,6 +21,14 @@ class App extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => UserBloc(),
+          child: Container(),
+        ),
+        BlocProvider(
+          create: (context) => AdminBloc(ProductPictureCubit()),
+          child: Container(),
+        ),
+        BlocProvider(
+          create: (context) => ProductPictureCubit(),
           child: Container(),
         ),
       ],
