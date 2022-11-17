@@ -13,11 +13,11 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
     on<AddProduct>((event, emit) async {
       emit(AdminIsLoading());
       ProductModel data = ProductModel(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
-        dateTime: DateTime.now(),
-        name: event.name,
-        price: event.price,
-      );
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          dateTime: DateTime.now(),
+          name: event.name,
+          price: event.price,
+          desc: event.desc);
       final result = await AdminService().addNewProduct(data,
           file: (productPictureCubit.state is ProductPictureIsLoaded)
               ? (productPictureCubit.state as ProductPictureIsLoaded).file

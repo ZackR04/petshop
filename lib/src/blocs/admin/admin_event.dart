@@ -7,8 +7,10 @@ abstract class AdminEvent {}
 class AddProduct extends AdminEvent {
   final String? name;
   final double? price;
+  final String? desc;
   AddProduct({
     this.name,
     this.price,
+    this.desc,
   });
 }

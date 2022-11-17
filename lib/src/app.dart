@@ -15,6 +15,7 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => UserBloc()),
         BlocProvider(create: (context) => ProductPictureCubit()),
+        BlocProvider(create: (context) => AddToCartCubit()),
         BlocProvider(
             create: (context) =>
                 AdminBloc(BlocProvider.of<ProductPictureCubit>(context))),

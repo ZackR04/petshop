@@ -10,12 +10,15 @@ class AdminScreen extends StatefulWidget {
 class _AdminScreenState extends State<AdminScreen> {
   final TextEditingController productNameController = TextEditingController();
   final TextEditingController productPriceController = TextEditingController();
+  final TextEditingController productDescController = TextEditingController();
 
   void reset() {
     //kita hapus name controller
     productNameController.clear();
     //kita hapus price controller
     productPriceController.clear();
+    //
+    productDescController.clear();
     //kita hapus state image picker
     BlocProvider.of<ProductPictureCubit>(context).resetImage();
   }
@@ -48,6 +51,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   BlocProvider.of<AdminBloc>(context).add(AddProduct(
                     name: productNameController.text,
                     price: double.parse(productPriceController.text),
+                    desc: productDescController.text,
                   ));
                 },
                 isLoading: (state is AdminIsLoading) ? true : false,
@@ -70,6 +74,11 @@ class _AdminScreenState extends State<AdminScreen> {
       TextFieldWidget(
         controller: productPriceController,
         title: 'Harga Produk',
+      ),
+      8.heightBox,
+      TextFieldWidget(
+        controller: productDescController,
+        title: 'Deskripsi Produk',
       ),
       8.heightBox,
       BlocBuilder<ProductPictureCubit, ProductPictureState>(
