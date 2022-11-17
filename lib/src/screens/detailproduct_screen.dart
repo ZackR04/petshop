@@ -3,6 +3,8 @@ part of 'screens.dart';
 class DetailProductScreen extends StatelessWidget {
   const DetailProductScreen({super.key});
 
+  //ubah
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
