@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_petshop/src/blocs/detail_product/detail_product_bloc.dart';
 import 'package:my_petshop/src/cubits/cubits.dart';
 import 'package:my_petshop/src/utilities/utilities.dart';
 import 'package:my_petshop/src/blocs/blocs.dart';
