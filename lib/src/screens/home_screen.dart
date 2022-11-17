@@ -22,6 +22,8 @@ class HomeScreen extends StatelessWidget {
               return VStack(
                 [
                   _buildAppBar(context, state.data),
+                  24.heightBox,
+                  _buildListProduct().expand(),
                 ],
                 alignment: MainAxisAlignment.start,
                 axisSize: MainAxisSize.max,
@@ -29,7 +31,7 @@ class HomeScreen extends StatelessWidget {
             }
             return 0.heightBox;
           },
-        ).p16(),
+        ).p16().centered(),
       ),
     );
   }
@@ -40,7 +42,7 @@ class HomeScreen extends StatelessWidget {
       HStack([
         VxCircle(
           radius: 65,
-          backgroundImage: (data.photoProfile != null)
+          backgroundImage: (data.photoProfile!.isNotEmpty)
               ? DecorationImage(
                   image: NetworkImage(data.photoProfile!),
                   fit: BoxFit.cover,
@@ -61,5 +63,50 @@ class HomeScreen extends StatelessWidget {
         icon: const Icon(Icons.logout),
       ),
     ])).make();
+  }
+
+  Widget _buildListProduct() {
+    return BlocConsumer<ListProductBloc, ListProductState>(
+      listener: (context, state) {
+        if (state is ListProductIsFailed) {
+          Commons().showSnackBar(context, state.message);
+        }
+      },
+      builder: (context, state) {
+        if (state is ListProductIsLoading) {
+          return const CircularProgressIndicator();
+        }
+        if (state is ListProductIsSuccess) {
+          final data = state.products;
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
+            ),
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  context.go(routeName.detailPath, extra: data[index].id);
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: VStack([
+                    Image.network(
+                      data[index].picture!,
+                      fit: BoxFit.cover,
+                    ).expand(),
+                    data[index].name!.text.bodyText1(context).make(),
+                    data[index].price!.text.bodyText2(context).make(),
+                  ]),
+                ),
+              );
+            },
+          );
+        }
+        return Container();
+      },
+    );
   }
 }

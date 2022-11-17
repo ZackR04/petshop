@@ -13,3 +13,4 @@ part 'login_screen.dart';
 part 'register_screen.dart';
 part 'home_screen.dart';
 part 'admin_screen.dart';
+part 'detailproduct_screen.dart';

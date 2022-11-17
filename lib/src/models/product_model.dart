@@ -1,6 +1,34 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'models.dart';
 
+class ListProductModel {
+  final List<ProductModel> products;
+  ListProductModel({
+    required this.products,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'products': products.map((x) => x.toMap()).toList(),
+    };
+  }
+
+  factory ListProductModel.fromMap(Map<String, dynamic> map) {
+    return ListProductModel(
+      products: List<ProductModel>.from(
+        (map['products'] as List<int>).map<ProductModel>(
+          (x) => ProductModel.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ListProductModel.fromJson(String source) =>
+      ListProductModel.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
 class ProductModel {
   final String? id;
   final DateTime? dateTime;
@@ -49,7 +77,9 @@ class ProductModel {
           : null,
       name: map['name'] != null ? map['name'] as String : null,
       price: map['price'] != null ? map['price'] as double : null,
-      picture: map['picture'] != null ? map['picture'] as String : null,
+      picture: map['picture'] != null
+          ? map['picture'] as String
+          : "https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg",
     );
   }
 
