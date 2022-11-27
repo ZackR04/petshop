@@ -2,77 +2,160 @@ part of 'screens.dart';
 
 class DetailProductScreen extends StatelessWidget {
   const DetailProductScreen({super.key});
-
-  //ubah
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: "Detail Produk".text.make()),
-      bottomNavigationBar: BlocConsumer<AddToCartCubit, AddToCartState>(
-        listener: (context, state) {
-          if (state is AddToCartIsSuccess) {
-            Commons().showSnackBar(context, state.message);
-          }
-        },
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: colorName.white,
+        iconTheme: const IconThemeData(color: colorName.black),
+      ),
+      bottomNavigationBar: BlocBuilder<DetailProductBloc, DetailProductState>(
         builder: (context, state) {
-          return BlocBuilder<DetailProductBloc, DetailProductState>(
-            builder: (context, detailState) {
-              if (detailState is DetailProductIsSuccess) {
-                return ButtonWidget(
-                  text: 'Add to Cart',
-                  isLoading: (state is AddToCartIsLoading) ? true : false,
-                  onPressed: () {
-                    BlocProvider.of<AddToCartCubit>(context)
-                        .addToCart(detailState.model);
+          if (state is DetailProductIsSuccess) {
+            return BlocConsumer<AddToCartBloc, AddToCartState>(
+              listener: (context, addToCartState) {
+                if (addToCartState is AddToCartIsSuccess) {
+                  Commons().showSnackBar(context, addToCartState.message);
+                }
+                if (addToCartState is AddToCartIsFailed) {
+                  Commons().showSnackBar(context, addToCartState.message);
+                }
+              },
+              builder: (context, addToCartState) {
+                return BlocBuilder<CheckVariantCubit, CheckVariantState>(
+                  builder: (context, variantState) {
+                    return ButtonWidget(
+                      text: 'Add To Cart',
+                      isLoading: (addToCartState is AddToCartIsLoading),
+                      onPressed: () {
+                        print('BENERAN INI KAN');
+                        BlocProvider.of<AddToCartBloc>(context).add(AddToCart(
+                            //untuk data
+                            state.data,
+                            //untuk variant yang dipilih
+                            (variantState as CheckVariantIsSelected)
+                                .selectedVariant));
+                      },
+                    ).p16().box.white.withShadow([
+                      BoxShadow(
+                          blurRadius: 10, color: colorName.grey.withOpacity(.1))
+                    ]).make();
                   },
                 );
-              }
-              return Container();
-            },
-          );
+              },
+            );
+          }
+          return 0.heightBox;
         },
       ),
-      body: SafeArea(
-        child: BlocConsumer<DetailProductBloc, DetailProductState>(
-          listener: (context, state) {
-            if (state is DetailProductIsFailed) {
-              Commons().showSnackBar(context, state.message);
-            }
-          },
-          builder: (context, state) {
-            if (state is DetailProductIsLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            if (state is DetailProductIsSuccess) {
-              final data = state.model;
-              return VStack([
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    data.picture!,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                8.heightBox,
-                data.price!.text.bold.size(20).base.make(),
-                8.heightBox,
-                data.name!.text.bodyText1(context).make(),
-                8.heightBox,
-                data.desc!.text.make(),
-                24.heightBox,
-                HStack([
-                  "Variant Produk".text.make(),
-                  16.widthBox,
-                ])
-              ]).p16();
-            }
-            return Container();
-          },
-        ),
+      body: BlocBuilder<DetailProductBloc, DetailProductState>(
+        builder: (context, state) {
+          if (state is DetailProductIsSuccess) {
+            return VStack([
+              _buildListImage(state),
+              _buildProductDetails(state),
+            ]).scrollVertical();
+          }
+          return Container();
+        },
       ),
+    );
+  }
+
+  Widget _buildProductDetails(DetailProductIsSuccess state) {
+    return VStack([
+      HStack([
+        VStack([
+          state.data.name!.text.size(20).semiBold.make(),
+          8.heightBox,
+          Commons().setPriceToIDR(state.data.price!).text.size(16).make(),
+        ]).expand(),
+        BlocListener<WishlistCubit, WishlistState>(
+          listener: (context, wishlistState) {
+            if (wishlistState is WishlistIsSuccess) {
+              Commons().showSnackBar(context, wishlistState.message);
+            }
+            if (wishlistState is WishlistIsFailed) {
+              Commons().showSnackBar(context, wishlistState.message);
+            }
+          },
+          child: BlocBuilder<CheckSavedCubit, CheckSavedState>(
+            builder: (context, checkSavedState) {
+              if (checkSavedState is CheckSavedIsSuccess) {
+                return IconButton(
+                    onPressed: () {
+                      BlocProvider.of<WishlistCubit>(context)
+                          .removeFromWishList(state.data.id!);
+                    },
+                    icon: const Icon(
+                      Icons.favorite,
+                      color: colorName.accentRed,
+                    ));
+              }
+              return IconButton(
+                  onPressed: () {
+                    BlocProvider.of<WishlistCubit>(context)
+                        .addToWishList(state.data);
+                  },
+                  icon: const Icon(Icons.favorite_border_rounded));
+            },
+          ),
+        )
+      ]),
+      VStack([
+        'Deskripsi'.text.size(16).bold.make(),
+        4.heightBox,
+        state.data.desc!.text.size(14).color(colorName.grey).make(),
+      ]).py16(),
+      VStack([
+        'Variant Produk'.text.bold.make(),
+        8.heightBox,
+        BlocBuilder<CheckVariantCubit, CheckVariantState>(
+          builder: (context, variantState) {
+            return HStack(state.data.variant!
+                .map((e) => VxBox(
+                            child: e.text
+                                .color((variantState as CheckVariantIsSelected)
+                                        .selectedVariant
+                                        .contains(e)
+                                    ? colorName.white
+                                    : colorName.black)
+                                .make())
+                        .color(variantState.selectedVariant.contains(e)
+                            ? colorName.secondary
+                            : colorName.white)
+                        .border(
+                            color: variantState.selectedVariant.contains(e)
+                                ? colorName.white
+                                : colorName.grey)
+                        .p16
+                        .rounded
+                        .make()
+                        .onTap(() {
+                      BlocProvider.of<CheckVariantCubit>(context).selectItem(e);
+                    }).pOnly(right: 4))
+                .toList());
+          },
+        )
+      ])
+    ]).p16();
+  }
+
+  Widget _buildListImage(DetailProductIsSuccess state) {
+    return VxSwiper.builder(
+      itemCount: state.data.pictures!.length,
+      autoPlay: true,
+      aspectRatio: 16 / 9,
+      itemBuilder: (context, index) {
+        return AspectRatio(
+          aspectRatio: 16 / 9,
+          child: Image.network(
+            state.data.pictures![index],
+            fit: BoxFit.cover,
+          ),
+        );
+      },
     );
   }
 }

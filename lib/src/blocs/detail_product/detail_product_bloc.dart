@@ -12,7 +12,7 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
       emit(DetailProductIsLoading());
       final result = await ProductService().fetchDetailProduct(event.docID);
       emit(result.fold((l) => DetailProductIsFailed(message: l),
-          (r) => DetailProductIsSuccess(model: r)));
+          (r) => DetailProductIsSuccess(data: r)));
     });
   }
 }

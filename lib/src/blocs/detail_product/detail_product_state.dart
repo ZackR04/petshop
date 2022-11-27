@@ -16,8 +16,8 @@ class DetailProductIsFailed extends DetailProductState {
 }
 
 class DetailProductIsSuccess extends DetailProductState {
-  final ProductModel model;
+  final ProductModel data;
   DetailProductIsSuccess({
-    required this.model,
+    required this.data,
   });
 }

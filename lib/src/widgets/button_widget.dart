@@ -31,6 +31,6 @@ class ButtonWidget extends StatelessWidget {
               ),
             ).centered().p(14)
           : text.text.buttonText(context).color(colorName.white).make().p(14),
-    ).wFull(context);
+    );
   }
 }

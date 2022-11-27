@@ -29,11 +29,6 @@ class UserModel {
     };
   }
 
-  String toJson() => json.encode(toMap());
-
-  factory UserModel.fromJson(String source) =>
-      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       username: map['username'] != null ? map['username'] as String : null,
@@ -43,6 +38,30 @@ class UserModel {
           map['photoProfile'] != null ? map['photoProfile'] as String : null,
       walletId: map['walletId'] != null ? map['walletId'] as String : null,
       admin: map['admin'] != null ? map['admin'] as bool : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory UserModel.fromJson(String source) {
+    return UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  }
+
+  UserModel copyWith({
+    String? username,
+    String? email,
+    String? uid,
+    String? photoProfile,
+    String? walletId,
+    bool? admin,
+  }) {
+    return UserModel(
+      username: username ?? this.username,
+      email: email ?? this.email,
+      uid: uid ?? this.uid,
+      photoProfile: photoProfile ?? this.photoProfile,
+      walletId: walletId ?? this.walletId,
+      admin: admin ?? this.admin,
     );
   }
 }
